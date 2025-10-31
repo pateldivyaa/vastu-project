@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: vastu-backend
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: vastu-db
+          property: connectionString
+    plan: free
+  - type: database
+    name: vastu-db
+    plan: free
